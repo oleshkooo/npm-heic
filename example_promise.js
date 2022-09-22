@@ -1,4 +1,4 @@
-const Convert = require('heic')
+const Convert = require('@oleshkooo/heic')
 const { promisify } = require('util')
 const fs = require('fs')
 

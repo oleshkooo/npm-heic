@@ -1,6 +1,6 @@
 {
     "name": "@oleshkooo/heic",
-    "version": "0.0.3",
+    "version": "0.0.2",
     "description": "Convert image from .HEIC to .JPG",
     "author": {
         "name": "Oleshkooo",

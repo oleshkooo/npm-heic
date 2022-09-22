@@ -1,7 +1,7 @@
 {
     "name": "heic",
     "author": "Oleshkooo",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Convert image from .HEIC to .JPG",
     "main": "index.js",
     "scripts": {

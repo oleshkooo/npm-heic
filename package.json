@@ -1,25 +1,34 @@
 {
-  "name": "@oleshkooo/heic",
-  "version": "1.0.0",
-  "description": "Convert image from .HEIC to .JPG",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "build": "pkg index.js --targets node16-win-x64 && rename index.exe heic.exe"
-  },
-  "keywords": [
-    "convert",
-    "image",
-    "heic",
-    "jpg",
-    "jpeg",
-    "cli"
-  ],
-  "author": "Oleshkooo",
-  "license": "ISC",
-  "dependencies": {
-    "heic-convert": "^1.2.4",
-    "progress": "^2.0.3"
+    "name": "@oleshkooo/heic",
+    "author": "Oleshkooo",
+    "version": "1.0.0",
+    "description": "Convert image from .HEIC to .JPG",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js",
+      "dev": "nodemon index.js",
+      "build": "pkg index.js --targets node16-win-x64 && rename index.exe heic.exe"
+    },
+    "keywords": [
+      "convert",
+      "image",
+      "heic",
+      "jpg",
+      "jpeg",
+      "cli"
+    ],
+    "dependencies": {
+        "heic-convert": "^1.2.4",
+        "progress": "^2.0.3"
+    },
+    "license": "ISC",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Oleshkooo/oleshkooo-heic.git"
+    },
+    "bugs": {
+      "url": "https://github.com/Oleshkooo/oleshkooo-heic/issues"
+    },
+    "homepage": "https://github.com/Oleshkooo/oleshkooo-heic#readme"
   }
-}
+  

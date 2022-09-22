@@ -1,9 +1,9 @@
 # Install
 ```
-npm i heic-jpg-convert
+npm i @oleshkooo/heic
 
 # to use in terminal
-npm i heic-jpg-convert -g
+npm i @oleshkooo/heic -g
 ```
 
 # Usage
@@ -11,7 +11,7 @@ Convert a .HEIC file/Buffer to .JPG file/Buffer
 
 ## Await
 ```
-const Convert = require('heic-jpg-convert')
+const Convert = require('@oleshkooo/heic')
 const { promisify } = require('util')
 const fs = require('fs')
 
@@ -52,7 +52,7 @@ func()
 
 ## Promises
 ```
-const Convert = require('heic-jpg-convert')
+const Convert = require('@oleshkooo/heic')
 const { promisify } = require('util')
 const fs = require('fs')
 

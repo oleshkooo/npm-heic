@@ -1,4 +1,4 @@
-const Convert = require('heic-jpg-convert')
+const Convert = require('heic')
 const { promisify } = require('util')
 const fs = require('fs')
 

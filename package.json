@@ -1,14 +1,14 @@
 {
     "name": "@oleshkooo/heic",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Convert image from .HEIC to .JPG",
     "author": {
-      "name": "Oleshkooo",
-      "url": "https://github.com/Oleshkooo"
+        "name": "Oleshkooo",
+        "url": "https://github.com/Oleshkooo"
     },
     "preferGlobal": true,
     "bin": {
-      "heic": "index.js"
+        "heic": "index.js"
     },
     "main": "index.js",
     "scripts": {

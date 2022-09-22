@@ -8,7 +8,7 @@
     },
     "preferGlobal": true,
     "bin": {
-        "heic": "index.js"
+        "heic": "node index.js"
     },
     "main": "index.js",
     "scripts": {

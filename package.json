@@ -1,0 +1,19 @@
+{
+  "name": "heic-jpg-convert",
+  "version": "1.0.0",
+  "description": "Convert image from .HEIC to .JPG",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "pkg index.js --targets node16-win-x64 && rename index.exe heic.exe"
+  },
+  "keywords": ["convert", "image", "heic", "jpg", "jpeg"],
+  "author": "Oleshkooo",
+  "license": "ISC",
+  "dependencies": {
+    "heic-convert": "^1.2.4",
+    "progress": "^2.0.3",
+    "sharp": "^0.31.0"
+  }
+}

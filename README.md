@@ -2,11 +2,20 @@
 ```
 npm i heic
 
-# to use in terminal
+# install globally
 npm i heic -g
+```
 
-# to run in terminal use
-heic [image.HEIC]
+# CLI
+```
+# Convert one file
+heic [file.HEIC]
+
+# Convert two or more files
+heic [file1.HEIC] [file2.HEIC]
+
+# Convert all files in current directory
+heic *
 ```
 
 # Usage

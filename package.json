@@ -1,6 +1,6 @@
 {
     "name": "heic",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Convert image from .HEIC to .JPG",
     "author": {
         "name": "Oleshkooo",
@@ -8,7 +8,7 @@
     },
     "preferGlobal": true,
     "bin": {
-        "heic": "node index.js"
+        "heic": "bin/cli.js"
     },
     "main": "index.js",
     "scripts": {
@@ -25,16 +25,17 @@
         "cli"
     ],
     "dependencies": {
+        "chalk": "^4.1.2",
         "heic-convert": "^1.2.4",
         "progress": "^2.0.3"
     },
     "license": "ISC",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Oleshkooo/oleshkooo-heic.git"
+        "url": "git+https://github.com/Oleshkooo/heic.git"
     },
     "bugs": {
-        "url": "https://github.com/Oleshkooo/oleshkooo-heic/issues"
+        "url": "https://github.com/Oleshkooo/heic/issues"
     },
-    "homepage": "https://github.com/Oleshkooo/oleshkooo-heic#readme"
+    "homepage": "https://github.com/Oleshkooo/heic#readme"
 }

@@ -1,57 +1,166 @@
 const path = require('path')
 const fs = require('fs')
-const Convert = require('./Convert.js')
-module.exports = Convert
+const { promisify } = require('util')
+const heicConvert = require('heic-convert')
+const ProgressBar = require('progress')
 
 
-const main = () => {
-    const args = process.argv.slice(2)
-    const currentDirectory = process.cwd()
-    let allFlag = args.includes('*')
-
-    const convert = new Convert()
-
-    // no args
-    if (args.length == 0) {
-        console.log('No file passed')
+class Convert {
+    /**
+     * @param {String} filePath
+     * @description remove file extension
+     * @return {String} file without extension
+     * @example
+     * const file = './directory/file.exe'
+     * const noExt = this.removeExtension(file)
+     * // ./directory/file
+     */
+    #removeExtension = file => {
+        var lastDotPosition = file.lastIndexOf('.')
+        if (lastDotPosition === -1) return file
+        else return file.substr(0, lastDotPosition)
     }
 
-    // *
-    else if (allFlag) {
-        fs.readdir(currentDirectory, async (err, files) => {
-            if (err)
-                return console.log('Unable to scan directory')
+    /**
+     * @param {String} filePath path to your file
+     * @description convert .heic to .jpg file with progress bar in terminal
+     * @return {Promise<String>} Promise with file name string
+     * @error returns [error, fileName]
+     * @example
+     * const convert = new Convert()
+     * convert.cli('someFile.HEIC')
+     */
+    cli = async filePath => new Promise(async (resolve, reject) => {
+        let fileName
+        let progressBar
 
-            for (const file of files) {
-                const fileExt = path.parse(file).ext.toLowerCase()
-                const fileBase = path.parse(file).base
+        try {
+            // if (path.parse(filePath).ext.toLocaleLowerCase() != '.heic')
+            //     throw err()
+            fileName = path.parse(filePath).name
+            progressBar = new ProgressBar(`${fileName} |:bar| :percent :elapseds`, {
+                complete: '█',
+                incomplete: ' ',
+                width: 20,
+                total: 5,
+                clear: true,
+            })
+            progressBar.tick()
 
-                if (fileExt == '.heic') {
-                    await convert.cli(fileBase)
-                    .then(file => console.log(`${file} - Done`))
-                    .catch(([err, file]) => console.log(`${file} - Error occured`))
-                }
-            }
-        })
-    }
+            const filePathNoExt = this.#removeExtension(filePath)
+            progressBar.tick()
 
-    // 1 arg
-    else if (args.length == 1 && !allFlag) {
-        convert.cli(args[0])
-        .then(file => console.log(`${file} - Done`))
-        .catch(([err, file]) => console.log(`${file} - Error occured`))
-    }
+            const inputBuffer = await promisify(fs.readFile)(filePath)
+            progressBar.tick()
 
-    // 2+ args
-    else {
-        const asyncConvert = async () => {
-            for (let i = 0; i < args.length; i++) {
-                await convert.cli(args[i])
-                .then(file => console.log(`${file} - Done`))
-                .catch(([err, file]) => console.log(`${file} - Error occured`))
-            }
+            const outputBuffer = await heicConvert({
+                buffer: inputBuffer,
+                format: 'JPEG',
+            })
+            progressBar.tick()
+
+            await promisify(fs.writeFile)(`${filePathNoExt}.jpg`, outputBuffer)
+            progressBar.tick()
+
+            resolve(fileName)
         }
-        asyncConvert()
-    }
+        catch (err) {
+            progressBar.terminate()
+            reject([ err, fileName ])
+        }
+    })
+
+    /**
+     * @param {String} filePath path to your file
+     * @description convert .heic to .jpg file
+     * @return {Promise<void>} Promise with file name string
+     * @example
+     * const convert = new Convert()
+     * convert.fileToFile('someFile.HEIC')
+     */
+    fileToFile = async filePath => new Promise(async (resolve, reject) => {
+        try {
+            const fileName = path.parse(filePath).name
+            const filePathNoExt = this.#removeExtension(filePath)
+            const inputBuffer = await promisify(fs.readFile)(filePath)
+            const outputBuffer = await heicConvert({
+                buffer: inputBuffer,
+                format: 'JPEG',
+            })
+            await promisify(fs.writeFile)(`${filePathNoExt}.jpg`, outputBuffer)
+            resolve(fileName)
+        }
+        catch (err) {
+            reject(err)
+        }
+    })
+
+    /**
+     * @param {String} filePath path to your file
+     * @description convert .heic to .jpg file
+     * @return {Promise<Buffer>} Promise with Buffer value
+     * @example
+     * const convert = new Convert()
+     * let buffer = convert.fileToBuffer('someFile.HEIC')
+     */
+    fileToBuffer = async filePath => new Promise(async (resolve, reject) => {
+        try {
+            const inputBuffer = await promisify(fs.readFile)(filePath)
+            const outputBuffer = await heicConvert({
+                buffer: inputBuffer,
+                format: 'JPEG',
+            })
+            resolve(outputBuffer)
+        }
+        catch (err) {
+            reject(err)
+        }
+    })
+
+    /**
+     * @param {Buffer} buffer file buffer
+     * @description convert .heic to .jpg file
+     * @return {Promise<Buffer>} Promise with Buffer value
+     * @example
+     * let someBuffer = ...
+     * const convert = new Convert()
+     * let buffer = convert.bufferToBuffer(someBuffer)
+     */
+    bufferToBuffer = async buffer => new Promise(async (resolve, reject) => {
+        try {
+            const outputBuffer = await heicConvert({
+                buffer: buffer,
+                format: 'JPEG',
+            })
+            resolve(outputBuffer)
+        }
+        catch (err) {
+            reject(err)
+        }
+    })
+
+    /**
+     * @param {Buffer, String}
+     * @description convert .heic to .jpg file
+     * @return {Promise<void>} Promise with file name string
+     * @example
+     * let someBuffer = ...
+     * const convert = new Convert()
+     * convert.bufferToFile(someBuffer)
+     */
+    bufferToFile = async (buffer, filePath) => new Promise(async (resolve, reject) => {
+        try {
+            const fileName = path.parse(filePath).name
+            const outputBuffer = await heicConvert({
+                buffer: buffer,
+                format: 'JPEG',
+            })
+            await promisify(fs.writeFile)(`${filePath}.jpg`, outputBuffer)
+            resolve(fileName)
+        }
+        catch (err) {
+            reject(err)
+        }
+    })
 }
-if (typeof require !== 'undefined' && require.main === module) main()
+module.exports = Convert

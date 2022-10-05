@@ -32,10 +32,10 @@
     "license": "ISC",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Oleshkooo/heic.git"
+        "url": "git+https://github.com/Oleshkooo/npm-heic.git"
     },
     "bugs": {
-        "url": "https://github.com/Oleshkooo/heic/issues"
+        "url": "https://github.com/Oleshkooo/npm-heic/issues"
     },
-    "homepage": "https://github.com/Oleshkooo/heic#readme"
+    "homepage": "https://github.com/Oleshkooo/npm-heic#readme"
 }

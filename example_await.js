@@ -1,7 +1,7 @@
-const Convert = require('heic')
 const { promisify } = require('util')
 const fs = require('fs')
 
+const Convert = require('heic')
 
 const func = async () => {
     // create a class instance
@@ -11,27 +11,26 @@ const func = async () => {
     const filePath = 'someFile.HEIC'
 
     // create a buffer from buffer
-    const buffer = await promisify(fs.readFile)(filePath);
-
+    const buffer = await promisify(fs.readFile)(filePath)
 
     // .HEIC FILE -> .JPG FILE (with progress bar in terminal)
-    const newFile_1 = await convert.cli(filePath)
-    console.log(`${newFile_1} - Done`)
+    const newFile1 = await convert.cli(filePath)
+    console.log(`${newFile1} - Done`)
 
     // .HEIC FILE -> .JPG FILE
-    const newFile_2 = await convert.fileToFile(filePath)
-    console.log(`${newFile_2} - Done`)
+    const newFile2 = await convert.fileToFile(filePath)
+    console.log(`${newFile2} - Done`)
 
     // .HEIC FILE -> .JPG BUFFER
-    const outputBuffer_1 = await convert.fileToBuffer(filePath)
-    console.log(outputBuffer_1)
+    const outputBuffer1 = await convert.fileToBuffer(filePath)
+    console.log(outputBuffer1)
 
     // .HEIC BUFFER -> .JPG BUFFER
-    const outputBuffer_2 = await convert.bufferToBuffer(buffer)
-    console.log(outputBuffer_2)
+    const outputBuffer2 = await convert.bufferToBuffer(buffer)
+    console.log(outputBuffer2)
 
     // .HEIC BUFFER -> .JPG FILE
-    const fileName_3 = await convert.bufferToFile(buffer, filePath)
-    console.log(`${fileName_3} - Done`)
+    const fileName3 = await convert.bufferToFile(buffer, filePath)
+    console.log(`${fileName3} - Done`)
 }
 func()

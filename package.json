@@ -10,7 +10,7 @@
     "scripts": {
         "start": "node index.js",
         "dev": "nodemon index.js",
-        "build": "pkg index.js --targets node16-win-x64 && rename index.exe heic.exe",
+        "build": "pkg ./bin/cli.js --targets node16-win-x64 && rename cli.exe heic.exe",
         "lint": "eslint .",
         "lint:fix": "eslint --fix ."
     },

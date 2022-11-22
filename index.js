@@ -6,6 +6,7 @@ const { promisify } = require('util')
 const heicConvert = require('heic-convert')
 const ProgressBar = require('progress')
 
+
 class Convert {
     /**
      * @param {String} file
